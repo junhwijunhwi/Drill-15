@@ -2,6 +2,7 @@ from pico2d import draw_rectangle, get_canvas_width, load_image
 
 import game_world
 import game_framework
+import zombie
 
 # 단위: 픽셀, 초
 LAUNCH_SPEED_X = 300.0
@@ -44,4 +45,7 @@ class Ball:
 
     def handle_collision(self,group,other):
         if group == "boy:ball":
+            game_world.remove_object(self)
+        if group == "zombie:ball":
+            self.zombie.life +=1
             game_world.remove_object(self)

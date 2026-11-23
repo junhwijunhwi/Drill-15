@@ -27,7 +27,7 @@ def handle_events():
 def init():
     global boy
     global balls
-
+   
     # 객체들을 생성
     boy = Boy()
     grass = Grass()
@@ -39,10 +39,18 @@ def init():
     game_world.add_oject(grass, 0)
     zombies = [Zombie() for _ in range(4)]
     game_world.add_objects(zombies,1)
+    
     # 생성된 객체들의 충돌 관계를 등록
     game_world.add_collision_pairs("boy:ball",boy,None)
+    game_world.add_collision_pairs("zombie:ball",zombies,None)
+    game_world.add_collision_pairs("boy:zombie",boy,None)
     for ball in balls:
         game_world.add_collision_pairs("boy:ball",None,ball)
+        game_world.add_collision_pairs("zombies:ball",None,ball)
+
+    for zombie in zombies:
+        game_world.add_collision_pairs("boy:zombie",None,zombie)
+    
 
     
 
