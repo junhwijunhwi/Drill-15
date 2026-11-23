@@ -33,7 +33,7 @@ class Zombie:
         self.x, self.y = random.randint(MIN_X, MAX_X), 150
         self.frame = random.randint(0, 9)
         self.dir = random.choice([-1, 1])
-        self.zomebie_life[self] = 0
+        self.zomebie_life = 0
 
     def update(self):
         dt = game_framework.frame_time
@@ -50,15 +50,10 @@ class Zombie:
     def draw(self):
         image = Zombie.images['Walk'][int(self.frame)]
         if self.dir < 0:
-            if self.zombie_life == 1:
-                image.composite_draw(0, 'h', self.x, self.y, 100, 100)
-            else:
-                image.composite_draw(0, 'h', self.x, self.y, 200, 200)
+            image.composite_draw(0, 'h', self.x, self.y, 200, 200)
+
         else:
-            if self.zombie_life == 1:
-                image.draw(self.x, self.y, 100, 100)
-            else:
-                image.draw(self.x, self.y, 200, 200)
+            image.draw(self.x, self.y, 200, 200)
         draw_rectangle(*self.get_bb())
 
     def get_bb(self):
